@@ -29,6 +29,9 @@ urlpatterns = [
     path('hello/', views.HelloView.as_view(), name='hello'),
     path('api/api-auth/', obtain_auth_token, name='api_token_auth'),
     path('api/create-user/', csrf_exempt(views.createUser), name='create-user'),
+    path('api/login/', csrf_exempt(views.ingresar), name='login'),
     path('', include('webdev.core.urls')),    
-    path('', include('frontend.urls')),    
+    path('', include('frontend.urls')),  
+
+    
 ]

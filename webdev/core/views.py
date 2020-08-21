@@ -17,6 +17,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny
 from rest_framework_jwt.serializers import VerifyJSONWebTokenSerializer
 from django.http import JsonResponse
+from django.contrib.auth import authenticate, login
 
 
 
@@ -54,7 +55,22 @@ def createUser(request):
         #traceback.print_exc()
         return Response(status=400)
 
-
+@api_view(['POST'])
+def ingresar(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    print(username)
+    print(password)
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        print("entra")
+        login(request, user)
+        return Response(status=201)
+        
+    else:
+        print("NO entra")
+        return Response(status=400)
+        
 
 
 

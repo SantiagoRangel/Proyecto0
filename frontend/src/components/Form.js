@@ -1,30 +1,69 @@
 import React, { Component } from 'react';
 
 class Form extends Component {
+    mandarPost() {
+        console.log("goaskdad");
+       
+        var url = 'http://127.0.0.1:8000/api/create-user/';
+        var data = {};
+        var formData = new FormData();
+        var username = document.getElementById("username").value;
+        var first_name =  document.getElementById("first_name").value;
+        var lname = document.getElementById("last_name").value;
+        var emailp = document.getElementById("email").value;
+        var passwordp = document.getElementById("password").value;
+        formData.append('username', username)
+        formData.append('first_name', username)
+        formData.append('last_name', username)
+        formData.append('email', username)
+        formData.append('password', username)
+
+        data = {...username, ...first_name, last_name: lname, email: emailp, password: passwordp}
+        console.log(data)
+
+
+fetch(url, {
+  method: 'POST', // or 'PUT'
+  body: formData, // data can be `string` or {object}!
+  /* headers:{
+    'Content-Type': 'application/json'
+  } */
+}).then(res => (res.status ==201)?  alert("Usuario Creado!"): "")
+.catch(error => console.error('Error:', error))
+.then(response => console.log('Success:', response));
+    }
+
     render() {
         return (
             <div style={{width: "800px", marginTop:"150px", marginLeft:"300px"}}>
-                <form>
-                <div class="form-group">
-    <label for="exampleInputEmail1">First Name</label>
-    <input type="text" class="form-control" id="first_name"></input>
+                              <h2>Register</h2>
+
+                <div className="form-group">
+    <label htmlFor="exampleInputEmail1">User Name</label>
+    <input type="text" className="form-control" id="username"></input>
   </div>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Last Name</label>
-    <input type="text" class="form-control" id="last_name"></input>
+                <div className="form-group">
+    <label htmlFor="exampleInputEmail1">First Name</label>
+    <input type="text" className="form-control" id="first_name"></input>
   </div>
-                <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input>
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  <div className="form-group">
+    <label htmlFor="exampleInputEmail1">Last Name</label>
+    <input type="text" className="form-control" id="last_name"></input>
   </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1"></input>
+                <div className="form-group">
+    <label htmlFor="exampleInputEmail1">Email address</label>
+    <input type="email" className="form-control" id="email" aria-describedby="emailHelp"></input>
+  </div>
+  <div className="form-group">
+    <label htmlFor="exampleInputPassword1">Password</label>
+    <input type="password" className="form-control" id="password"></input>
   </div>
   
-  <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
+  <button  className="btn btn-primary" onClick={this.mandarPost}>Submit</button>
+  <hr></hr>
+  <a href="http://127.0.0.1:8000/Login">Ya tengo una cuenta</a>
+
+                
             </div>
         );
     } 
