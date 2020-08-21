@@ -9,6 +9,10 @@ class Event extends Component {
     componentDidMount = (e) => {
        // console.log(this.props.value);
     }
+    delete2 = (e) => {
+        this.delete();
+        
+    }
     delete = (e) => {
         var url = "http://127.0.0.1:8000/api/events/" + this.props.e.id;
       fetch(url, {
@@ -21,13 +25,13 @@ class Event extends Component {
           console.log(res);
           if (res.status == 204) {
             console.log("borro el evento");
-            this.forceUpdate()
+            this.props.callback;
           } else {
             alert("No pudo borrar el evento");
           }
         })
         .catch((error) => console.error("Error:", error))
-        .then((response) => alert("Borro el evento")
+        .then((response) => this.props.callback()
         );
     }
   render() {
@@ -44,7 +48,7 @@ class Event extends Component {
             <a  className="btn btn-info" data-toggle="modal" data-target={"#modal"+this.props.e.event_name}>
               Detail
             </a>
-            <a  className="btn btn-danger" onClick={this.delete}>
+            <a  className="btn btn-danger" onClick={this.delete2}>
               Delete
             </a>
           </div>

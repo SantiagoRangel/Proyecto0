@@ -6,12 +6,24 @@ class EventList extends Component {
     super(props);
     // No llames this.setState() aquí!
     this.state = { events: [] };
+    this.crear = this.crear.bind(this);
   }
   componentDidUpdate() {
     console.log(this.state.events);
+    console.log(this.state.token);
+
   }
-  componentDidMount = (e) => {
+  crear2 = (e) =>{
+    this.crear();
+    this.forceUpdate();
+  }
+  empezar = (e) =>{
+    console.log("se llama emepzar");
+    this.forceUpdate();
     console.log(this.props.location.state.token);
+    if(this.props.location.state.token){
+      this.setState({token: this.props.location.state.token});
+    }
     let tk = this.props.location.state.token;
     var str = "Token " + tk;
     console.log(str);
@@ -39,6 +51,10 @@ class EventList extends Component {
         .catch((error) => console.error("Error:", error))
         .then((response) => console.log("Success:", response));
     }
+
+  }
+  componentDidMount = (e) => {
+    this.empezar();
   };
   logout = (e) => {
     console.log("logout");
@@ -85,7 +101,8 @@ class EventList extends Component {
           var js = res.json();
           console.log(js);
           js.then((rta) => console.log(rta));
-          this.setState({rta: true});
+          alert("Se creó correctamente el evento");
+          this.empezar();
         } else {
           alert("Falla al crear el evento");
         }
@@ -157,7 +174,7 @@ class EventList extends Component {
             <label htmlFor="exampleInputPassword1">Thumbnail</label>
             <input type="text" className="form-control" id="thumbnail"></input>
           </div>
-          <button className="btn btn-primary" onClick={this.crear}>
+          <button className="btn btn-primary" onClick={this.crear2}>
             Crear
           </button>
           
@@ -179,7 +196,7 @@ class EventList extends Component {
             <div className="row">
             {this.state.events.map((e, index) => (
                 <div className="col-4">
-                  <Event key={index} e={e} token={this.props.location.state.token}></Event>
+                  <Event key={index} e={e} token={this.props.location.state.token} callback={this.empezar}></Event>
                 </div>
               ))}
             </div>
@@ -188,7 +205,7 @@ class EventList extends Component {
           </div>
         </div>
         <Link to="/login">
-          <button className="btn btn-primary" onClick={this.logout}>
+          <button className="btn btn-primary" onClick={this.logout} >
             Log Out
           </button>
         </Link>
