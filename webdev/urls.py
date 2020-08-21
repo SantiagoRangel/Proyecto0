@@ -19,6 +19,8 @@ from django.conf.urls import url
 from webdev.core import views
 from rest_framework.authtoken.views import obtain_auth_token  
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework_simplejwt import views as jwt_views
+
 
 
 
@@ -27,5 +29,6 @@ urlpatterns = [
     path('hello/', views.HelloView.as_view(), name='hello'),
     path('api/api-auth/', obtain_auth_token, name='api_token_auth'),
     path('api/create-user/', csrf_exempt(views.createUser), name='create-user'),
-    path('', include('webdev.core.urls'))    
+    path('', include('webdev.core.urls')),    
+    path('', include('frontend.urls')),    
 ]

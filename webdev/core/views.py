@@ -13,6 +13,11 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.csrf import ensure_csrf_cookie
+from rest_framework.authtoken.models import Token
+from rest_framework.permissions import AllowAny
+from rest_framework_jwt.serializers import VerifyJSONWebTokenSerializer
+from django.http import JsonResponse
+
 
 
 
@@ -24,6 +29,15 @@ class HelloView(APIView):
     def get(self, request):
         content = {'message': 'Hello, World!'}
         return Response(content)
+
+
+class Welcome(APIView):
+    permission_classes = (IsAuthenticated,)
+    def get(self, request):
+        content = {"message": "Welcome to the BookStore!"}
+        return JsonResponse(content)
+            
+         
 @api_view(['POST'])
 #@permission_classes((permissions.AllowAny,))
 
@@ -45,18 +59,38 @@ def createUser(request):
 
 
 
-            
-         
-
 class Events(APIView):
     permission_classes = (IsAuthenticated,)
     def get(self, request):
-        events = Event.objects.all()
+        token = request.META.get('HTTP_AUTHORIZATION', " ").split(' ')[1]
+        events = Event.objects.filter(tokenu = token)
         serializer = serializers.EventSerializer(events, many=True)
         return Response(serializer.data)
 
     def post(self, request):
-        serializer = serializers.EventSerializer(data=request.data)
+        print(request.data)
+        token = request.META.get('HTTP_AUTHORIZATION', " ").split(' ')[1]
+        dic = request.data.copy()
+        dic.appendlist('tokenu', token)
+        print(dic)
+        serializer = serializers.EventSerializer(data=dic)
+        #token = request.headers["Authorization"]
+        
+        #token = token[5:46]
+        
+        #user_id = Token.objects.get(key=token)
+    
+        #user = Token.objects.get(key= request.META["HTTP_AUTHORIZATION"]).user
+        #print(token.user_id)
+
+        print(token)
+        #data = {'token': token}
+        #valid_data = VerifyJSONWebTokenSerializer().validate(data)
+        #user = valid_data['user']
+        #print(valid_data)
+        #request.user = user
+        #print(user)
+        
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

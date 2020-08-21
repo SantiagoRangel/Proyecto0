@@ -11,6 +11,11 @@ class EventSerializer(serializers.ModelSerializer):
     # deserialize and serialize
     class Meta:
         model = models.Event
-        fields = ['id', 'event_name', 'event_category', 'event_place', 'event_address', 'event_initial_date' , 'event_final_date','event_type', 'thumbnail' ]
+        fields = ['id', 'event_name', 'event_category', 'event_place', 'event_address', 'event_initial_date' , 'event_final_date','event_type', 'thumbnail' ,'tokenu']
+    #def create(self, validated_data):
+    #data = validated_data.copy()
+    #data['user'] = self.context['request'].user
+
+    #return super(JournalSerializer, self).create(data)
 
 
