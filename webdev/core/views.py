@@ -84,6 +84,7 @@ class Events(APIView):
         return Response(serializer.data)
 
     def post(self, request):
+        print("request data: ")
         print(request.data)
         token = request.META.get('HTTP_AUTHORIZATION', " ").split(' ')[1]
         dic = request.data.copy()
@@ -110,6 +111,7 @@ class Events(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        print(serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
