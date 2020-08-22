@@ -8,7 +8,7 @@ class Login extends Component {
   
     pedirToken = (e) =>{
         console.log("pedir token")
-        var url = 'http://127.0.0.1:8000/api/api-auth/';
+        var url = '/api/api-auth/';
         var formData = new FormData();
         var user = this.state.username;
         var pass = this.state.password;
@@ -43,7 +43,7 @@ class Login extends Component {
     mandarPost = (e) => {
         let self = this;
        
-        var url = 'http://127.0.0.1:8000/api/login/';
+        var url = '/api/login/';
         var data = {};
         var formData = new FormData();
         var usernamep = document.getElementById("usernamel").value;

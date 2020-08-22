@@ -14,7 +14,7 @@ class Event extends Component {
         
     }
     delete = (e) => {
-        var url = "http://127.0.0.1:8000/api/events/" + this.props.e.id;
+        var url = "/api/events/" + this.props.e.id;
       fetch(url, {
         method: "DELETE", // or 'PUT'
         headers: {

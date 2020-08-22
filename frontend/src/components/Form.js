@@ -68,7 +68,8 @@ class Form extends Component {
         </button>
         </Link>
         <hr></hr>
-        <a href="http://127.0.0.1:8000/Login">Already have an account?</a>
+       
+        <a href="/Login">Already have an account?</a>
       </div>
     );
   }

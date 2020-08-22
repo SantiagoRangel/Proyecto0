@@ -28,7 +28,7 @@ class EventList extends Component {
     var str = "Token " + tk;
     console.log(str);
     if (this.props.location.state.token) {
-      var url = "http://127.0.0.1:8000/api/events/";
+      var url = "/api/events/";
       fetch(url, {
         method: "GET", // or 'PUT'
         headers: {
@@ -63,7 +63,7 @@ class EventList extends Component {
   };
 
   crear = (e) => {
-    var url = "http://127.0.0.1:8000/api/events/";
+    var url = "/api/events/";
     let tk = this.props.location.state.token;
     var str = "Token " + tk;
 
