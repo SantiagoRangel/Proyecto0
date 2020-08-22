@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import {Link} from 'react-router-dom';
 class Form extends Component {
   mandarPost() {
     console.log("goaskdad");
@@ -62,10 +62,11 @@ class Form extends Component {
           <label htmlFor="exampleInputPassword1">Password</label>
           <input type="password" className="form-control" id="password"></input>
         </div>
-
+        <Link to='/Login'>
         <button className="btn btn-primary" onClick={this.mandarPost}>
           Submit
         </button>
+        </Link>
         <hr></hr>
         <a href="http://127.0.0.1:8000/Login">Already have an account?</a>
       </div>
