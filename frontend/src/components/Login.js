@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect , Link} from 'react-router-dom';
 
 class Login extends Component {
     state = {
@@ -96,8 +96,8 @@ fetch(url, {
     <label htmlFor="exampleInputPassword1">Password</label>
     <input type="password" className="form-control" id="passwordl"></input>
   </div>
-  
-  <button  className="btn btn-primary" onClick={this.mandarPost}>Log In</button>
+  <Link>  <button  className="btn btn-primary" onClick={this.mandarPost}>Log In</button>
+</Link>
 
   <hr></hr>
   <a href="http://127.0.0.1:8000/Register">Register</a>
