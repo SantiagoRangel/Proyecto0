@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'webdev.core',
-    'rest_auth',
     'django.contrib.sites',
     'rest_auth.registration',
     'frontend'

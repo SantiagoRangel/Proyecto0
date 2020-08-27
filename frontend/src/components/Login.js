@@ -100,7 +100,7 @@ fetch(url, {
 </Link>
 
   <hr></hr>
-  <a href="http://127.0.0.1:8000/Register">Register</a>
+  <a href="/Register">Register</a>
             </div>
             
             </div>
